@@ -1,0 +1,233 @@
+/* feature-card-styles.css — animated demos for the Agentic CRM features grid */
+
+/* Shared demo frame */
+.fc-demo {
+  margin-top: 16px;
+  background: rgba(0,0,0,0.3);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px;
+  font-family: "Geist Mono", monospace;
+  font-size: 12px;
+  color: var(--fg-dim);
+  position: relative;
+  overflow: hidden;
+}
+[data-theme="light"] .fc-demo {
+  background: rgba(255,255,255,0.6);
+  border-color: rgba(91,46,255,0.12);
+  color: #2a2a3a;
+}
+
+/* ── 1. Call recording ─────────────────────────────── */
+.fc-rec-top { display: flex; justify-content: space-between; font-size: 11px; color: var(--fg-muted); }
+.fc-rec-rec { color: var(--coral); display: inline-flex; align-items: center; gap: 6px; }
+.fc-rec-dot { display: inline-block; width: 7px; height: 7px; background: var(--coral); border-radius: 50%; box-shadow: 0 0 8px var(--coral); animation: fcBlink 1.2s ease-in-out infinite; }
+@keyframes fcBlink { 50% { opacity: 0.35; } }
+.fc-wave { position: relative; height: 64px; display: flex; align-items: center; gap: 2px; margin: 12px 0 8px; padding: 0 2px; }
+.fc-wave-bar { width: 3px; flex: 1; background: linear-gradient(180deg, var(--violet-soft), var(--violet)); border-radius: 2px; opacity: 0.42; animation: fcWavePulse 1.6s ease-in-out infinite; }
+.fc-wave-bar.past { opacity: 1; background: linear-gradient(180deg, #2bd9c8, var(--violet-soft)); }
+@keyframes fcWavePulse { 0%,100% { transform: scaleY(0.85); } 50% { transform: scaleY(1.1); } }
+.fc-wave-cursor { position: absolute; top: 0; bottom: 0; width: 2px; background: var(--coral); box-shadow: 0 0 12px var(--coral); transition: left 0.1s linear; pointer-events: none; }
+.fc-rec-controls { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.fc-rec-btn { width: 22px; height: 22px; border-radius: 50%; background: var(--violet); color: white; display: inline-flex; align-items: center; justify-content: center; font-size: 9px; }
+.fc-rec-progress { flex: 1; height: 3px; background: rgba(255,255,255,0.06); border-radius: 2px; overflow: hidden; }
+[data-theme="light"] .fc-rec-progress { background: rgba(91,46,255,0.08); }
+.fc-rec-progress span { display: block; height: 100%; background: linear-gradient(90deg, #2bd9c8, var(--violet)); border-radius: 2px; transition: width 0.1s linear; }
+.fc-rec-mini { font-size: 10px; color: var(--fg-muted); }
+.fc-rec-line { font-size: 12px; line-height: 1.4; padding-top: 8px; border-top: 1px dashed var(--border); animation: fcFadeIn 0.5s ease; }
+.fc-rec-line .who { color: var(--violet-soft); font-weight: 600; margin-right: 4px; }
+@keyframes fcFadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+
+/* ── 2. Kanban ─────────────────────────────────────── */
+.fc-kanban { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; padding: 10px; }
+.fc-kan-col { background: rgba(255,255,255,0.02); border: 1px solid var(--border); border-radius: 8px; padding: 8px; min-height: 160px; }
+[data-theme="light"] .fc-kan-col { background: rgba(91,46,255,0.03); }
+.fc-kan-head { display: flex; justify-content: space-between; align-items: center; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--fg-muted); margin-bottom: 8px; }
+.fc-kan-count { background: var(--violet); color: white; padding: 1px 6px; border-radius: 8px; font-size: 9px; }
+.fc-kan-cards { display: flex; flex-direction: column; gap: 6px; }
+.fc-kan-card {
+  background: linear-gradient(180deg, rgba(123,91,255,0.06), rgba(123,91,255,0.02));
+  border: 1px solid rgba(123,91,255,0.18);
+  border-radius: 6px; padding: 8px;
+  font-size: 11px;
+  transition: all 0.5s cubic-bezier(.22,.9,.3,1);
+  animation: fcKanIn 0.4s ease;
+}
+@keyframes fcKanIn { from { opacity: 0; transform: translateY(-8px) scale(0.95); } to { opacity: 1; transform: translateY(0) scale(1); } }
+.fc-kan-card.moving { transform: translateX(50%) scale(1.04); box-shadow: 0 6px 20px rgba(91,46,255,0.4); border-color: var(--violet); opacity: 0.8; }
+.fc-kan-co { color: var(--fg); font-weight: 500; }
+.fc-kan-amt { color: var(--violet-soft); font-size: 10px; margin-top: 2px; }
+.fc-kan-bar { height: 2px; background: rgba(255,255,255,0.06); border-radius: 1px; margin-top: 6px; overflow: hidden; }
+.fc-kan-bar span { display: block; height: 100%; background: linear-gradient(90deg, #2bd9c8, var(--violet)); transition: width 0.6s ease; }
+
+/* ── 3. Dialer ─────────────────────────────────────── */
+.fc-dialer-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 10px; }
+.fc-dialer-stat { background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 6px; padding: 8px 10px; text-align: left; }
+[data-theme="light"] .fc-dialer-stat { background: rgba(91,46,255,0.04); }
+.fc-dialer-stat .k { display: block; font-size: 18px; color: var(--fg); font-weight: 600; letter-spacing: -0.02em; font-family: "Geist", sans-serif; }
+.fc-dialer-stat .k.accent { color: var(--violet-soft); }
+.fc-dialer-stat .l { display: block; font-size: 9px; letter-spacing: 0.14em; color: var(--fg-muted); margin-top: 2px; }
+.fc-dialer-rows { display: flex; flex-direction: column; gap: 4px; }
+.fc-dialer-row {
+  display: grid; grid-template-columns: 24px 1fr 22px 80px; align-items: center; gap: 8px;
+  padding: 6px 8px; border-radius: 5px; font-size: 11px;
+  background: rgba(255,255,255,0.02); transition: all 0.5s ease;
+}
+[data-theme="light"] .fc-dialer-row { background: rgba(91,46,255,0.02); }
+.fc-dialer-row .num { color: var(--fg-muted); font-size: 9px; }
+.fc-dialer-row .phone { color: var(--fg); }
+.fc-dialer-row .stat-chip { font-size: 9px; letter-spacing: 0.12em; padding: 2px 6px; border-radius: 4px; text-align: center; }
+.fc-dialer-row.stat-connected { background: rgba(43,217,200,0.08); }
+.fc-dialer-row.stat-connected .stat-chip { background: rgba(43,217,200,0.18); color: #2bd9c8; }
+.fc-dialer-row.stat-ringing { background: rgba(149,120,255,0.06); }
+.fc-dialer-row.stat-ringing .stat-chip { background: rgba(149,120,255,0.16); color: var(--violet-soft); }
+.fc-dialer-row.stat-voicemail .stat-chip { background: rgba(255,255,255,0.05); color: var(--fg-muted); }
+.fc-dialer-row.stat-queued .stat-chip { background: rgba(255,255,255,0.04); color: var(--fg-muted); }
+.fc-dialer-row .stat-icon { font-size: 12px; text-align: center; color: var(--fg-muted); }
+.fc-dialer-row .ringer { display: inline-block; animation: fcRingSpin 1s linear infinite; color: var(--violet-soft); }
+@keyframes fcRingSpin { to { transform: rotate(360deg); } }
+.livebars { display: inline-flex; align-items: end; gap: 2px; height: 12px; }
+.livebars i { width: 2px; background: #2bd9c8; border-radius: 1px; animation: fcLiveBars 0.8s ease-in-out infinite; }
+.livebars i:nth-child(1) { animation-delay: 0s; height: 50%; }
+.livebars i:nth-child(2) { animation-delay: 0.15s; height: 80%; }
+.livebars i:nth-child(3) { animation-delay: 0.3s; height: 65%; }
+.livebars i:nth-child(4) { animation-delay: 0.1s; height: 90%; }
+@keyframes fcLiveBars { 0%, 100% { transform: scaleY(0.5); } 50% { transform: scaleY(1.2); } }
+
+/* ── 4. Appointment ───────────────────────────────── */
+.fc-appt { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.fc-appt-chat { display: flex; flex-direction: column; gap: 6px; }
+.fc-appt-bubble { padding: 8px 10px; border-radius: 10px; font-size: 11px; line-height: 1.4; opacity: 0; transform: translateY(6px); transition: all 0.5s; max-width: 95%; }
+.fc-appt-bubble.in { opacity: 1; transform: translateY(0); }
+.fc-appt-bubble.out { background: rgba(255,255,255,0.04); color: var(--fg); align-self: flex-end; border-bottom-right-radius: 3px; }
+[data-theme="light"] .fc-appt-bubble.out { background: rgba(91,46,255,0.06); }
+.fc-appt-bubble.in.in { background: rgba(149,120,255,0.12); border: 1px solid rgba(149,120,255,0.25); color: var(--fg); border-bottom-left-radius: 3px; }
+.fc-appt-bubble .ag { display: block; font-size: 9px; letter-spacing: 0.12em; color: var(--violet-soft); font-weight: 700; margin-bottom: 2px; }
+.fc-appt-cal { background: rgba(255,255,255,0.02); border: 1px solid var(--border); border-radius: 8px; padding: 10px; }
+[data-theme="light"] .fc-appt-cal { background: rgba(255,255,255,0.6); }
+.fc-appt-cal-head { display: flex; justify-content: space-between; align-items: center; font-size: 9px; color: var(--fg-muted); letter-spacing: 0.1em; margin-bottom: 8px; }
+.fc-appt-mini { color: var(--fg-muted); transition: color 0.4s; }
+.fc-appt-mini.on { color: #2bd9c8; }
+.fc-appt-days { display: grid; grid-template-columns: repeat(7, 1fr); gap: 3px; margin-bottom: 8px; }
+.fc-appt-day { aspect-ratio: 1; display: flex; align-items: center; justify-content: center; font-size: 10px; background: rgba(255,255,255,0.03); border-radius: 4px; color: var(--fg-muted); transition: all 0.4s; }
+.fc-appt-day.sel { background: var(--violet); color: white; box-shadow: 0 0 12px rgba(91,46,255,0.45); }
+.fc-appt-slots { display: grid; grid-template-columns: repeat(5, 1fr); gap: 3px; }
+.fc-appt-slot { padding: 4px 0; font-size: 10px; text-align: center; background: rgba(255,255,255,0.03); border-radius: 4px; color: var(--fg-muted); position: relative; transition: all 0.4s; }
+.fc-appt-slot.pulse { animation: fcPulse 0.8s ease-in-out infinite; background: rgba(149,120,255,0.15); color: var(--violet-soft); }
+.fc-appt-slot.booked { background: linear-gradient(135deg, #2bd9c8, var(--violet)); color: white; font-weight: 600; }
+.fc-appt-slot .bk { margin-left: 3px; }
+@keyframes fcPulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.04); } }
+.fc-appt-confirm { margin-top: 8px; padding: 8px; background: rgba(43,217,200,0.08); border: 1px solid rgba(43,217,200,0.25); border-radius: 6px; animation: fcFadeIn 0.5s ease; }
+.fc-appt-confirm .bk-head { color: #2bd9c8; font-weight: 600; font-size: 11px; }
+.fc-appt-confirm .bk-meta { color: var(--fg-muted); font-size: 10px; margin-top: 2px; }
+
+/* ── 5. Bulk campaigns marquee ─────────────────────── */
+.fc-bulk-head { display: flex; justify-content: space-between; font-size: 10px; color: var(--fg-muted); letter-spacing: 0.1em; margin-bottom: 8px; }
+.fc-bulk-head > :first-child { color: #2bd9c8; }
+.fc-bulk-scroll { height: 160px; overflow: hidden; mask-image: linear-gradient(180deg, transparent, black 12%, black 88%, transparent); -webkit-mask-image: linear-gradient(180deg, transparent, black 12%, black 88%, transparent); }
+.fc-bulk-track { display: flex; flex-direction: column; gap: 4px; }
+.fc-bulk-track.go { animation: fcMarquee 26s linear infinite; }
+@keyframes fcMarquee { from { transform: translateY(0); } to { transform: translateY(-50%); } }
+.fc-bulk-row { display: grid; grid-template-columns: 56px 1fr 60px 50px; align-items: center; gap: 8px; padding: 6px 8px; background: rgba(255,255,255,0.02); border-radius: 5px; font-size: 11px; }
+[data-theme="light"] .fc-bulk-row { background: rgba(91,46,255,0.02); }
+.fc-bulk-tag { font-size: 9px; padding: 2px 6px; border-radius: 4px; font-weight: 700; letter-spacing: 0.06em; text-align: center; }
+.fc-bulk-name { color: var(--fg); }
+.fc-bulk-num { color: var(--violet-soft); font-family: "Geist", sans-serif; text-align: right; font-weight: 600; }
+.fc-bulk-delta { color: #2bd9c8; font-size: 10px; text-align: right; }
+
+/* ── 6. Code/inbound-outbound terminal ─────────────── */
+.fc-code-bar { display: flex; align-items: center; justify-content: space-between; padding: 8px 10px; margin: -14px -14px 10px; background: rgba(0,0,0,0.4); border-bottom: 1px solid var(--border); font-size: 10px; color: var(--fg-muted); letter-spacing: 0.08em; }
+[data-theme="light"] .fc-code-bar { background: rgba(91,46,255,0.04); }
+.fc-code-bar .dots { display: inline-flex; gap: 4px; }
+.fc-code-bar .dots i { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.15); }
+.fc-code-bar .dots i:first-child { background: var(--coral); }
+.fc-code-bar .dots i:nth-child(2) { background: #ffb84d; }
+.fc-code-bar .dots i:nth-child(3) { background: #2bd9c8; }
+.fc-code-body { font-family: "Geist Mono", monospace; font-size: 11px; line-height: 1.55; }
+.fc-code-line { display: grid; grid-template-columns: 22px 1fr; gap: 8px; animation: fcCodeIn 0.4s ease both; }
+.fc-code-line .ln-num { color: var(--fg-muted); opacity: 0.5; font-size: 10px; }
+.ln-cmd { color: #2bd9c8; }
+.ln-ok { color: var(--violet-soft); }
+.ln-em { color: var(--fg); }
+.ln-log { color: var(--fg-dim); }
+.ln-dim { color: var(--fg-muted); opacity: 0.7; }
+@keyframes fcCodeIn { from { opacity: 0; transform: translateX(-4px); } to { opacity: 1; transform: translateX(0); } }
+.fc-code-prompt { color: var(--violet-soft); margin-top: 4px; }
+.fc-code-prompt .caret { display: inline-block; width: 6px; height: 11px; background: var(--violet-soft); margin-left: 4px; vertical-align: -1px; animation: termblink 1s steps(2) infinite; }
+
+/* ── 7. Executive assistant orb ────────────────────── */
+.fc-exec { display: grid; grid-template-columns: 110px 1fr; gap: 12px; align-items: center; }
+.fc-exec-orb { position: relative; width: 110px; height: 110px; }
+.fc-exec-core { position: absolute; left: 50%; top: 50%; width: 42px; height: 42px; border-radius: 50%; background: radial-gradient(circle at 35% 30%, var(--violet-soft), var(--violet) 70%); transform: translate(-50%, -50%); box-shadow: 0 0 32px rgba(91,46,255,0.6); animation: orbPulse 2.4s ease-in-out infinite; }
+.fc-exec-ring { position: absolute; left: 50%; top: 50%; border-radius: 50%; border: 1px solid rgba(149,120,255,0.4); transform: translate(-50%, -50%); animation: fcExecRing 3s ease-out infinite; }
+.fc-exec-ring.r1 { width: 60px; height: 60px; }
+.fc-exec-ring.r2 { width: 80px; height: 80px; animation-delay: 0.5s; }
+.fc-exec-ring.r3 { width: 102px; height: 102px; animation-delay: 1.1s; }
+@keyframes fcExecRing { 0% { opacity: 0.6; transform: translate(-50%, -50%) scale(0.7); } 100% { opacity: 0; transform: translate(-50%, -50%) scale(1.1); } }
+.fc-exec-grid { position: absolute; inset: 0; display: grid; grid-template-columns: repeat(6, 1fr); gap: 1px; transform: rotate(0deg); pointer-events: none; opacity: 0.3; }
+.fc-exec-grid span { background: var(--violet-soft); width: 2px; height: 2px; border-radius: 50%; align-self: center; justify-self: center; animation: fcExecDot 1.6s ease-in-out infinite; }
+@keyframes fcExecDot { 0%, 100% { opacity: 0.2; } 50% { opacity: 1; } }
+.fc-exec-brief { animation: fcFadeIn 0.5s ease; min-height: 100px; }
+.fc-exec-time { font-size: 9px; letter-spacing: 0.14em; color: #2bd9c8; font-weight: 700; margin-bottom: 4px; }
+.fc-exec-co { font-size: 13px; font-weight: 600; color: var(--fg); margin-bottom: 6px; font-family: "Geist", sans-serif; }
+.fc-exec-body { font-size: 11px; line-height: 1.45; color: var(--fg-dim); margin-bottom: 6px; }
+.fc-exec-meta { font-size: 10px; color: var(--violet-soft); padding-top: 6px; border-top: 1px dashed var(--border); }
+
+/* ── 8. Activity feed ─────────────────────────────── */
+.fc-act-head { display: flex; justify-content: space-between; font-size: 10px; color: var(--fg-muted); letter-spacing: 0.1em; margin-bottom: 8px; }
+.fc-act-head > :first-child { color: #2bd9c8; display: inline-flex; align-items: center; gap: 6px; }
+.livedot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: #2bd9c8; box-shadow: 0 0 6px #2bd9c8; animation: fcBlink 1.4s ease-in-out infinite; }
+.fc-act-list { display: flex; flex-direction: column; gap: 4px; }
+.fc-act-row { display: grid; grid-template-columns: 22px 1fr auto; gap: 8px; align-items: center; padding: 6px 8px; background: rgba(255,255,255,0.02); border-radius: 5px; font-size: 11px; animation: fcActIn 0.5s ease; border-left: 2px solid transparent; }
+[data-theme="light"] .fc-act-row { background: rgba(91,46,255,0.02); }
+@keyframes fcActIn { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: translateY(0); } }
+.fc-act-row.tone-voice { border-color: #2bd9c8; }
+.fc-act-row.tone-msg { border-color: var(--violet-soft); }
+.fc-act-row.tone-book { border-color: var(--violet); }
+.fc-act-row.tone-sys { border-color: var(--fg-muted); }
+.fc-act-row.tone-win { border-color: #ffb84d; }
+.fc-act-row .ic { font-size: 14px; color: var(--violet-soft); }
+.fc-act-row .line { color: var(--fg); }
+.fc-act-row .line b { font-weight: 600; }
+.fc-act-row .meta { font-size: 10px; color: var(--fg-muted); margin-top: 1px; }
+.fc-act-row .now { font-size: 9px; padding: 2px 5px; background: rgba(43,217,200,0.18); color: #2bd9c8; border-radius: 4px; letter-spacing: 0.1em; font-weight: 700; }
+
+/* ── 9. Unified chat ──────────────────────────────── */
+.fc-uchat-tabs { display: flex; gap: 4px; flex-wrap: wrap; margin-bottom: 8px; }
+.fc-uchat-tab { display: inline-flex; align-items: center; gap: 5px; font-size: 10px; padding: 3px 7px; border-radius: 4px; background: rgba(255,255,255,0.03); color: var(--fg-muted); transition: all 0.4s; }
+[data-theme="light"] .fc-uchat-tab { background: rgba(91,46,255,0.03); }
+.fc-uchat-tab.on { background: rgba(149,120,255,0.18); color: var(--fg); }
+.fc-uchat-tab .ic { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+.fc-uchat-thread { display: flex; flex-direction: column; gap: 5px; min-height: 180px; }
+.fc-uchat-msg { padding: 7px 9px; border-radius: 8px; font-size: 11px; line-height: 1.4; border: 1px solid; max-width: 88%; animation: fcFadeIn 0.5s ease; }
+.fc-uchat-msg.in { align-self: flex-start; background: rgba(255,255,255,0.03); }
+.fc-uchat-msg.out { align-self: flex-end; background: rgba(149,120,255,0.08); }
+.fc-uchat-msg .src { display: block; font-size: 9px; letter-spacing: 0.1em; font-weight: 700; margin-bottom: 2px; }
+.fc-uchat-msg .txt { color: var(--fg-dim); }
+.fc-uchat-foot { display: flex; justify-content: space-between; font-size: 9px; color: var(--fg-muted); letter-spacing: 0.1em; padding-top: 8px; margin-top: 6px; border-top: 1px dashed var(--border); }
+.fc-uchat-foot > :last-child { color: var(--violet-soft); font-weight: 700; }
+
+/* ── 10. Call history search ──────────────────────── */
+.fc-callh-search { display: grid; grid-template-columns: 18px 1fr 32px; gap: 8px; align-items: center; padding: 8px 10px; background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: 6px; margin-bottom: 8px; }
+[data-theme="light"] .fc-callh-search { background: rgba(255,255,255,0.7); }
+.fc-callh-search .ic { color: var(--violet-soft); }
+.fc-callh-search .q { color: var(--fg); font-size: 12px; min-height: 14px; }
+.fc-callh-search .q .caret { display: inline-block; width: 1.5px; height: 12px; background: var(--violet-soft); margin-left: 1px; vertical-align: -1px; animation: termblink 1s steps(2) infinite; }
+.fc-callh-search .hint { font-size: 9px; color: var(--fg-muted); padding: 2px 5px; background: rgba(255,255,255,0.04); border-radius: 3px; text-align: center; }
+.fc-callh-list { display: flex; flex-direction: column; gap: 5px; }
+.fc-callh-row { padding: 8px 10px; background: rgba(255,255,255,0.02); border-radius: 5px; font-size: 11px; animation: fcFadeIn 0.4s ease; }
+[data-theme="light"] .fc-callh-row { background: rgba(91,46,255,0.02); }
+.fc-callh-meta { display: flex; justify-content: space-between; color: var(--fg); font-weight: 500; margin-bottom: 3px; }
+.fc-callh-snip { color: var(--fg-dim); font-size: 11px; line-height: 1.4; }
+.fc-callh-snip mark { background: rgba(149,120,255,0.3); color: var(--fg); padding: 0 3px; border-radius: 2px; }
+.fc-callh-time { font-size: 10px; margin-top: 3px; }
+.dim { color: var(--fg-muted); }
+
+/* Mobile tightening */
+@media (max-width: 700px) {
+  .fc-appt { grid-template-columns: 1fr; }
+  .fc-exec { grid-template-columns: 1fr; text-align: center; }
+  .fc-exec-orb { margin: 0 auto; }
+  .fc-kanban { grid-template-columns: 1fr; }
+}
